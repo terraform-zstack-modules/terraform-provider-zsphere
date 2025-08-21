@@ -281,7 +281,8 @@ func (p *ZSphereProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 func (p *ZSphereProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
-		//NewExampleResource,
+		ImageResource,
+		InstanceResource,
 	}
 }
 
@@ -294,6 +295,13 @@ func (p *ZSphereProvider) EphemeralResources(ctx context.Context) []func() ephem
 func (p *ZSphereProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		ZSphereClusterDataSource,
+		ZSphereZoneDataSource,
+		ZSphereHostsDataSource,
+		ZSphereImageStorageDataSource,
+		ZSphereImageDataSource,
+		ZSpherevmsDataSource,
+		ZSphereL3NetworkDataSource,
+		ZSpherePrimaryStorageDataSource,
 	}
 }
 

@@ -53,7 +53,7 @@ var FieldMapping = map[string]map[string]string{
 		"physical_interface": "physicalInterface",
 		"zone_uuid":          "zoneUuid",
 	},
-	"l3network": {},
+	"port_group": {},
 	"vip": {
 		"l3_network_uuid":       "l3NetworkUuid",
 		"peer_l3_network_uuids": "peerL3NetworkUuids",
