@@ -3,7 +3,8 @@
 terraform {
   required_providers {
     zsphere = {
-      source = "zstack.io/terraform-provider-zstack/zsphere"
+      source  = "terraform-zstack-modules/zsphere"
+      version = "1.0.0"
     }
   }
 }
