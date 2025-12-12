@@ -1,7 +1,5 @@
 github.com/bufbuild/protocompile v0.4.0 h1:LbFKd2XowZvQ/kajzguUp2DC9UEIQhIq77fZZlaQsNA=
 github.com/bufbuild/protocompile v0.4.0/go.mod h1:3v93+mbWn/v3xzN+31nwkJfrEpAUwp+BagBSZWx+TP8=
-github.com/chijiajian/zstack-sdk-go v1.0.0 h1:NTunjHyOfarLGbRWlsw4Z4tGNGBFqwjk5Y2AdR5Qya0=
-github.com/chijiajian/zstack-sdk-go v1.0.0/go.mod h1:GjNnl4r9WUQm7QekG5rbMsetMDMpF7AmGhd+pk6ZH/E=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -84,8 +82,8 @@ github.com/stretchr/testify v1.7.2/go.mod h1:R6va5+xMeoiuVRoj+gSkQ7d3FALtqAAGI1F
 github.com/stretchr/testify v1.8.3 h1:RP3t2pwF7cMEbC1dqtB6poj3niw/9gnV4Cjg5oW5gtY=
 github.com/stretchr/testify v1.8.3/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/tailscale/depaware v0.0.0-20210622194025-720c4b409502/go.mod h1:p9lPsd+cx33L3H9nNoecRRxPssFKUwwI50I3pZ0yT+8=
-github.com/terraform-zstack-modules/zsphere-sdk-go v1.0.0 h1:24IL63ycGgxQu8DS1MMSgpjA8XbSEkXqRBsHcAd4UJ0=
-github.com/terraform-zstack-modules/zsphere-sdk-go v1.0.0/go.mod h1:TegZKfG35N4Nsrme2xYe96M6+yyNWx8atLEtNUCg7Tw=
+github.com/terraform-zstack-modules/zsphere-sdk-go v1.1.0 h1:kbbuFD6qZHgHU6D9aiZBKO1yorIZcEU6kBogyuscxGM=
+github.com/terraform-zstack-modules/zsphere-sdk-go v1.1.0/go.mod h1:TegZKfG35N4Nsrme2xYe96M6+yyNWx8atLEtNUCg7Tw=
 github.com/vmihailenco/msgpack/v5 v5.4.1 h1:cQriyiUvjTwOHg8QZaPihLWeRAAVoCpE00IUPn0Bjt8=
 github.com/vmihailenco/msgpack/v5 v5.4.1/go.mod h1:GaZTsDaehaPpQVyxrf5mtQlH+pc21PIudVV/E3rRQok=
 github.com/vmihailenco/tagparser/v2 v2.0.0 h1:y09buUbR+b5aycVFQs/g70pqKVZNBmxwAhO7/IwNM9g=
