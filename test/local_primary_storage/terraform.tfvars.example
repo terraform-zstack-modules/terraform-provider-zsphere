@@ -1,0 +1,11 @@
+# Copyright (c) ZStack.io, Inc.
+
+zsphere_host           = "zstack-api.example.com"
+zsphere_access_key_id     = "your_access_key_id"
+zsphere_access_key_secret = "your_access_key_secret"
+
+# Resource variables
+datacenter_uuid      = "datacenter-uuid-here"
+cluster_uuid         = "cluster-uuid-here"
+local_storage_name   = "test-local-storage"
+local_storage_url    = "/vms_ds"

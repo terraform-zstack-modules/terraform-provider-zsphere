@@ -1,9 +1,9 @@
 data "zsphere_image_storages" "test" {
-  name = "BS-1-勿删"
+  name = "image_storage_from_terraform"
 }
 
 resource "zsphere_image" "image" {
-  name                = "test-from-terraform"
+  name                = "image_from_terraform"
   description         = "Add An example image from terraform"
   url                 = "http://minio.zstack.io:9001/packer/logserver-by-packer-image-compressed.qcow2"
   guest_os_type       = "Linux"

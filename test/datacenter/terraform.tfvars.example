@@ -1,0 +1,17 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Copy this file to terraform.tfvars and update the values
+# or use environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+
+# Provider Configuration
+zsphere_host              = "172.26.52.90"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Datacenter Resource Configuration (optional - defaults will be used if not set)
+datacenter_name        = "test-datacenter"
+datacenter_description = "Test datacenter created by Terraform"
+datacenter_is_default  = false

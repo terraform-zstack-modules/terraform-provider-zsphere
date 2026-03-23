@@ -1,0 +1,27 @@
+# Copyright (c) ZStack.io, Inc.
+
+# Provider Configuration
+zsphere_host              = "http://localhost:8080"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Port Group Configuration
+vswitch_uuid               = "uuid-of-vswitch-l2network"
+port_group_name           = "test-port-group"
+port_group_description    = "Test port group created by Terraform"
+port_group_vlan           = 100
+port_group_vlan_mode      = "ACCESS"  # ACCESS, NONE, PVLAN, TRUNK
+port_group_category       = "Private"  # Private, Public
+port_group_dns_domain     = "test.local"
+port_group_ip_version     = 4  # 4 or 6
+port_group_enable_ipam    = false
+port_group_dhcp_service   = false
+port_group_dns           = []
+
+# IP Range Configuration (used when enable_ipam = true)
+ip_range_name             = "test-ip-range"
+ip_range_start_ip         = ""
+ip_range_end_ip           = ""
+ip_range_netmask          = ""
+ip_range_gateway          = ""
+ip_range_allocate_strategy = "RandomIpAllocator"  # RandomIpAllocator, FirstAvailableIpAllocator, AscDelayRecycleIpAllocator

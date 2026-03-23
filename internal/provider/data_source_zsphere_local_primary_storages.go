@@ -15,15 +15,15 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &primaryStorageDataSource{}
-	_ datasource.DataSourceWithConfigure = &primaryStorageDataSource{}
+	_ datasource.DataSource              = &localPrimaryStorageDataSource{}
+	_ datasource.DataSourceWithConfigure = &localPrimaryStorageDataSource{}
 )
 
-func ZSpherePrimaryStorageDataSource() datasource.DataSource {
-	return &primaryStorageDataSource{}
+func ZSphereLocalPrimaryStorageDataSource() datasource.DataSource {
+	return &localPrimaryStorageDataSource{}
 }
 
-type primaryStorage struct {
+type localStorage struct {
 	Name                      types.String `tfsdk:"name"`
 	Uuid                      types.String `tfsdk:"uuid"`
 	State                     types.String `tfsdk:"state"`
@@ -33,21 +33,24 @@ type primaryStorage struct {
 	TotalPhysicalCapacity     types.Int64  `tfsdk:"total_physical_capacity"`
 	AvailablePhysicalCapacity types.Int64  `tfsdk:"available_physical_capacity"`
 	SystemUsedCapacity        types.Int64  `tfsdk:"system_used_capacity"`
+	Type                      types.String `tfsdk:"type"`
+	DatacenterUuid            types.String `tfsdk:"datacenter_uuid"`
+	Url                       types.String `tfsdk:"url"`
+	MountPath                 types.String `tfsdk:"mount_path"`
 }
 
-type primaryStorageDataSourceModel struct {
+type localPrimaryStorageDataSourceModel struct {
 	Name           types.String     `tfsdk:"name"`
 	NamePattern    types.String     `tfsdk:"name_pattern"`
 	Filter         []Filter         `tfsdk:"filter"`
-	PrimaryStorges []primaryStorage `tfsdk:"primary_storages"`
+	LocalStorages []localStorage   `tfsdk:"local_storages"`
 }
 
-type primaryStorageDataSource struct {
+type localPrimaryStorageDataSource struct {
 	client *client.ZSClient
 }
 
-// Configure implements datasource.DataSourceWithConfigure.
-func (d *primaryStorageDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *localPrimaryStorageDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -64,14 +67,12 @@ func (d *primaryStorageDataSource) Configure(_ context.Context, req datasource.C
 	d.client = client
 }
 
-// Metadata implements datasource.DataSourceWithConfigure.
-func (d *primaryStorageDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_primary_storages"
+func (d *localPrimaryStorageDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_local_primary_storages"
 }
 
-// Read implements datasource.DataSourceWithConfigure.
-func (d *primaryStorageDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var state primaryStorageDataSourceModel
+func (d *localPrimaryStorageDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var state localPrimaryStorageDataSourceModel
 	diags := req.Config.Get(ctx, &state)
 	resp.Diagnostics.Append(diags...)
 
@@ -80,6 +81,7 @@ func (d *primaryStorageDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	params := param.NewQueryParam()
+	params.AddQ("type=LocalStorage")
 
 	if !state.Name.IsNull() {
 		params.AddQ("name=" + state.Name.ValueString())
@@ -87,10 +89,10 @@ func (d *primaryStorageDataSource) Read(ctx context.Context, req datasource.Read
 		params.AddQ("name~=" + state.NamePattern.ValueString())
 	}
 
-	primaryStorages, err := d.client.QueryPrimaryStorage(params)
+	localStorages, err := d.client.QueryPrimaryStorage(ctx, &params)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read ZStack primary Storages",
+			"Unable to Read ZStack Local Primary Storages",
 			err.Error(),
 		)
 		return
@@ -107,26 +109,30 @@ func (d *primaryStorageDataSource) Read(ctx context.Context, req datasource.Read
 		filters[filter.Name.ValueString()] = values
 	}
 
-	filterPrimaryStorage, filterDiags := utils.FilterResource(ctx, primaryStorages, filters, "primary_storage")
+	filterLocalStorage, filterDiags := utils.FilterResource(ctx, localStorages, filters, "local_primary_storage")
 	resp.Diagnostics.Append(filterDiags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	for _, primarystorage := range filterPrimaryStorage {
-		primaryStorageState := primaryStorage{
-			TotalCapacity:             types.Int64Value(primarystorage.TotalCapacity),
-			State:                     types.StringValue(primarystorage.State),
-			Status:                    types.StringValue(primarystorage.Status),
-			Uuid:                      types.StringValue(primarystorage.UUID),
-			AvailableCapacity:         types.Int64Value(primarystorage.AvailableCapacity),
-			Name:                      types.StringValue(primarystorage.Name),
-			TotalPhysicalCapacity:     types.Int64Value(primarystorage.TotalPhysicalCapacity),
-			AvailablePhysicalCapacity: types.Int64Value(primarystorage.AvailablePhysicalCapacity),
-			SystemUsedCapacity:        types.Int64Value(primarystorage.SystemUsedCapacity),
+	for _, storage := range filterLocalStorage {
+		localStorageState := localStorage{
+			TotalCapacity:             types.Int64Value(storage.TotalCapacity),
+			State:                     types.StringValue(storage.State),
+			Status:                    types.StringValue(storage.Status),
+			Uuid:                      types.StringValue(storage.UUID),
+			AvailableCapacity:         types.Int64Value(storage.AvailableCapacity),
+			Name:                      types.StringValue(storage.Name),
+			TotalPhysicalCapacity:     types.Int64Value(storage.TotalPhysicalCapacity),
+			AvailablePhysicalCapacity: types.Int64Value(storage.AvailablePhysicalCapacity),
+			SystemUsedCapacity:        types.Int64Value(storage.SystemUsedCapacity),
+			Type:                      types.StringValue(storage.Type),
+			DatacenterUuid:            types.StringValue(storage.ZoneUuid),
+			Url:                       types.StringValue(storage.Url),
+			MountPath:                 types.StringValue(storage.MountPath),
 		}
 
-		state.PrimaryStorges = append(state.PrimaryStorges, primaryStorageState)
+		state.LocalStorages = append(state.LocalStorages, localStorageState)
 	}
 
 	diags = resp.State.Set(ctx, &state)
@@ -137,59 +143,74 @@ func (d *primaryStorageDataSource) Read(ctx context.Context, req datasource.Read
 
 }
 
-// Schema implements datasource.DataSourceWithConfigure.
-func (d *primaryStorageDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *localPrimaryStorageDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description: "List all primary storages, or query primary storages by exact name match, or query primary storages by name pattern fuzzy match.",
+		Description: "List all local primary storages, or query local primary storages by exact name match, or query local primary storages by name pattern fuzzy match.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				Description: "Exact name for searching primary storage.",
+				Description: "Exact name for searching local primary storage.",
 				Optional:    true,
 			},
 			"name_pattern": schema.StringAttribute{
 				Description: "Pattern for fuzzy name search, similar to MySQL LIKE. Use % for multiple characters and _ for exactly one character.",
 				Optional:    true,
 			},
-			"primary_storages": schema.ListNestedAttribute{
-				Description: "List of primary storage entries",
+			"local_storages": schema.ListNestedAttribute{
+				Description: "List of local primary storage entries",
 				Computed:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							Description: "Name of the primary storage",
+							Description: "Name of the local primary storage",
 							Computed:    true,
 						},
 
 						"uuid": schema.StringAttribute{
-							Description: "UUID identifier of the primary storage",
+							Description: "UUID identifier of the local primary storage",
 							Computed:    true,
 						},
 						"state": schema.StringAttribute{
-							Description: "State of the primary storage (Enabled or Disabled)",
+							Description: "State of the local primary storage (Enabled or Disabled)",
 							Computed:    true,
 						},
 						"status": schema.StringAttribute{
-							Description: "Readiness status of the primary storage",
+							Description: "Readiness status of the local primary storage",
 							Computed:    true,
 						},
 						"total_capacity": schema.Int64Attribute{
-							Description: "Total capacity of the primary storage in bytes",
+							Description: "Total capacity of the local primary storage in bytes",
 							Computed:    true,
 						},
 						"available_capacity": schema.Int64Attribute{
-							Description: "Available capacity of the primary storage in bytes",
+							Description: "Available capacity of the local primary storage in bytes",
 							Computed:    true,
 						},
 						"total_physical_capacity": schema.Int64Attribute{
-							Description: "Total physical capacity of the primary storage in bytes",
+							Description: "Total physical capacity of the local primary storage in bytes",
 							Computed:    true,
 						},
 						"available_physical_capacity": schema.Int64Attribute{
-							Description: "Available physical capacity of the primary storage in bytes",
+							Description: "Available physical capacity of the local primary storage in bytes",
 							Computed:    true,
 						},
 						"system_used_capacity": schema.Int64Attribute{
-							Description: "System used capacity of the primary storage in bytes",
+							Description: "System used capacity of the local primary storage in bytes",
+							Computed:    true,
+						},
+						"type": schema.StringAttribute{
+							Description: "Type of the local primary storage",
+							Computed:    true,
+						},
+						"datacenter_uuid": schema.StringAttribute{
+							Description: "Datacenter UUID of the local primary storage",
+							Computed:    true,
+						},
+						"url": schema.StringAttribute{
+							Description: "URL of the local primary storage",
+							Computed:    true,
+						},
+						"mount_path": schema.StringAttribute{
+							Description: "Mount path of the local primary storage",
 							Computed:    true,
 						},
 					},

@@ -35,3 +35,14 @@ func BytesToGB(bytes int64) int64 {
 func GBToBytes(gb int64) int64 {
 	return gb * 1024 * 1024 * 1024
 }
+
+func StringPointer(s string) *string {
+	if s == "" {
+		return nil
+	}
+	return &s
+}
+
+func BoolPointer(b bool) *bool {
+	return &b
+}

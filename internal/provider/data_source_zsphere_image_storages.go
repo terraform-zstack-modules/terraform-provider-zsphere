@@ -84,7 +84,7 @@ func (d *backupStorageDataSource) Read(ctx context.Context, req datasource.ReadR
 		params.AddQ("name~=" + state.NamePattern.ValueString())
 	}
 
-	backupstorages, err := d.client.QueryBackupStorage(params)
+	backupstorages, err := d.client.QueryBackupStorage(ctx, &params)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to Read ZSphere Image Storages",

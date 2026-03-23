@@ -1,0 +1,25 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Copy this file to terraform.tfvars and update the values
+# or use environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+
+# Provider Configuration
+zsphere_host              = "172.26.52.90"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Host Configuration
+host_name           = "test-host"
+host_description    = "Test host created by Terraform"
+host_management_ip  = "192.168.1.100"
+host_username       = "root"
+host_password       = "password"
+host_ssh_port       = 22
+host_iommu          = false
+host_ept            = true
+
+# Required: UUID of the cluster to which the host belongs
+cluster_uuid        = "your-cluster-uuid"

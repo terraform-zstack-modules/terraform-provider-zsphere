@@ -133,7 +133,7 @@ func (d *zoneDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 		params.AddQ("name~=" + state.NamePattern.ValueString())
 	}
 
-	zones, err := d.client.QueryZone(params)
+	zones, err := d.client.QueryZone(ctx, &params)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to Read ZSphere zones",

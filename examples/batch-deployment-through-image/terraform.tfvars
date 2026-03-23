@@ -1,0 +1,45 @@
+# ============================================
+# Complete Configuration Example - Supports all fields in test.csv
+# ============================================
+
+# ZSphere API Configuration
+zsphere_host      = ""
+access_key_id     = ""
+access_key_secret = ""
+
+# CSV file path
+csv_file_path = "test.csv"
+
+# Whether to use name lookup for UUIDs (if CSV contains names instead of UUIDs)
+use_name_lookup = false
+
+# The following configurations are used when use_name_lookup is true
+# port_group_name   = "your-port-group-name"
+# image_name        = "your-image-name"
+# datacenter_name   = "your-datacenter-name"
+# cluster_name      = "your-cluster-name"
+# host_name         = "your-host-name"
+# root_storage_name = "your-root-storage-name"
+# data_storage_name = "your-data-storage-name"
+
+# ============================================
+# Default Configuration Values
+# ============================================
+
+# Default root disk size (bytes) - 50 GB = 53687091200 bytes
+default_root_disk_size_bytes = 50 * 1024 * 1024 * 1024
+
+# Default disk bus type: virtio, ide, virtio-scsi, scsi
+default_bus_type = "virtio-scsi"
+
+# Default startup strategy: InstantStart, JustCreate, CreateStopped
+default_strategy = "InstantStart"
+
+# Default setting for never stop
+default_never_stop = false
+
+# Default CPU mode: host-model, host-passthrough, custom
+default_cpu_mode = "host-model"
+
+# Default architecture: x86_64, aarch64
+default_architecture = "x86_64"
