@@ -1,0 +1,25 @@
+# Copyright (c) ZStack.io, Inc.
+
+# Provider configuration
+zsphere_host              = "192.168.1.1"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Image storage configuration
+image_storage_name            = "test-image-storage"
+image_storage_description     = "Test image storage"
+image_storage_type            = "ImageStore"
+image_storage_zone_uuid       = ""
+
+# ImageStore specific
+image_storage_hostname      = "192.168.1.100"
+image_storage_url           = "/zstack/imagestore"
+image_storage_ssh_port      = 22
+image_storage_username     = "root"
+image_storage_password     = "your-password"
+image_storage_import_images = false
+
+# Ceph specific (uncomment if using Ceph)
+# image_storage_type         = "Ceph"
+# image_storage_pool_name    = "images"
+# image_storage_mon_urls    = ["ceph-user:password@192.168.1.10:6789"]

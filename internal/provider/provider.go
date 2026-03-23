@@ -252,7 +252,7 @@ func (p *ZSphereProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 		tflog.Debug(ctx, "Creating ZSphere client with account")
 		cli = client.NewZSClient(client.NewZSConfig(host, port, "zstack").LoginAccount(account_name, account_password).ReadOnly(false).Debug(true))
-		_, err := cli.Login()
+		_, err := cli.Login(ctx)
 		if err != nil {
 			resp.Diagnostics.AddError(
 				"Unable to Create ZSphere API Client",
@@ -282,7 +282,18 @@ func (p *ZSphereProvider) Configure(ctx context.Context, req provider.ConfigureR
 func (p *ZSphereProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		ImageResource,
+		ImageStorageResource,
 		InstanceResource,
+		DatacenterResource,
+		ClusterResource,
+		HostResource,
+		VmTemplateResource,
+		LocalPrimaryStorageResource,
+		NfsPrimaryStorageResource,
+		DistributedSwitchResource,
+		PortGroupResource,
+		SecurityGroupResource,
+		TagResource,
 	}
 }
 
@@ -301,7 +312,12 @@ func (p *ZSphereProvider) DataSources(ctx context.Context) []func() datasource.D
 		ZSphereImageDataSource,
 		ZSpherevmsDataSource,
 		ZSphereL3NetworkDataSource,
-		ZSpherePrimaryStorageDataSource,
+		ZSphereVmTemplateDataSource,
+		ZSphereLocalPrimaryStorageDataSource,
+		ZSphereNfsPrimaryStorageDataSource,
+		ZSphereDistributedSwitchDataSource,
+		SecurityGroupDataSource,
+		TagDataSource,
 	}
 }
 

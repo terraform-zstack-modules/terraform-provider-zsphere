@@ -1,0 +1,16 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Provider credentials are set via environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+#
+# Or uncomment and set below:
+# zsphere_host              = "your-zsphere-host"
+# zsphere_access_key_id     = "your-access-key-id"
+# zsphere_access_key_secret = "your-access-key-secret"
+
+# VM Template Configuration
+vm_instance_uuid = "existing-vm-instance-uuid-to-convert"
+vm_template_name = "test-vm-template"
+vm_template_description = "Test VM template description"

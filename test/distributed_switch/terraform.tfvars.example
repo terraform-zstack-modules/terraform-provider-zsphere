@@ -1,0 +1,18 @@
+# Copyright (c) ZStack.io, Inc.
+
+# Provider configuration
+zsphere_host              = "your-zsphere-host"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Distributed switch configuration
+datacenter_uuid                       = "your-datacenter-uuid"
+distributed_switch_name               = "test-distributed-switch"
+distributed_switch_description        = "Test distributed switch created by Terraform"
+distributed_switch_vswitch_type       = "LinuxBridge"
+distributed_switch_physical_interface = ""
+distributed_switch_bonding_name        = ""
+distributed_switch_bonding_mode       = ""
+distributed_switch_xmit_hash_policy   = ""
+distributed_switch_host_interface_list = []
+distributed_switch_cluster_uuids       = []

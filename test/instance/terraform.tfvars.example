@@ -1,0 +1,21 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Provider credentials are shared across all tests.
+# Set them via environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+#
+# Or create terraform.tfvars in the parent test/ directory.
+
+# Resource Configuration (required)
+image_uuid      = "your-image-uuid"
+l3_network_uuid = "your-l3-network-uuid"
+
+# Optional Configuration
+# instance_name        = "test-vm-instance"
+# instance_description = "Test VM instance created by Terraform"
+# cpu_num              = 2
+# memory_size          = 2048
+# platform             = "Linux"
+# strategy             = "InstantStart"

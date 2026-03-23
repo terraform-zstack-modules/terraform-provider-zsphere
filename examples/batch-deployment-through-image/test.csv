@@ -1,0 +1,4 @@
+vm_name,ip_address,netmask,gateway,port_uuid,image_uuid,datacenter_uuid,OS,BIOS,hostname,cpu,memorysize(G),datasize(G),datanum,cluster_uuid,host_uuid,ps_uuid,datavolume_ps_uuid
+zvm1,200.0.4.110,255.255.255.0,200.0.4.1,062ef50a4f2b43ddb4bd2d71c71e28c0,21814c51dcd2445793c828f563ca303e,86643f5442164890b8b71de5b582dc9f,CentOS 7,Legacy,centos71.6.1,1,1,1,2,5568b28dbaed465daf768b533b1fe72d,,,
+zvm2,200.0.4.111,255.255.255.0,200.0.4.1,062ef50a4f2b43ddb4bd2d71c71e28c0,21814c51dcd2445793c828f563ca303e,86643f5442164890b8b71de5b582dc9f,CentOS 7,Legacy,centos72.6.2,1,1,1,1,,d1058cff5c864a84848e0ab896736578,,899012cf2cc148b2925765b2e541a48a
+zvm3,200.0.4.113,255.255.255.0,200.0.4.1,062ef50a4f2b43ddb4bd2d71c71e28c0,21814c51dcd2445793c828f563ca303e,86643f5442164890b8b71de5b582dc9f,WindowsServer 2019,Legacy,windows,1,1,1,2,,,,

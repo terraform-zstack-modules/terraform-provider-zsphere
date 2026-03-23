@@ -1,0 +1,12 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Copy this file to terraform.tfvars and update the values
+# or use environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+
+# Provider Configuration (shared across all tests)
+zsphere_host              = "your-zsphere-host"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"

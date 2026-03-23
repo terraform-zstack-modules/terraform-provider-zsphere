@@ -1,0 +1,37 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Provider credentials are set via environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+#   export TF_VAR_image_url="your-image-url"
+#   export TF_VAR_image_url_qcow2="your-qcow2-image-url"
+#   export TF_VAR_image_url_iso="your-iso-image-url"
+#   export TF_VAR_image_url_raw="your-raw-image-url"
+#   export TF_VAR_image_url_vmdk="your-vmdk-image-url"
+#
+# Or uncomment and set below:
+# zsphere_host              = "your-zsphere-host"
+# zsphere_access_key_id     = "your-access-key-id"
+# zsphere_access_key_secret = "your-access-key-secret"
+
+# Image URL Configuration (required for tests)
+# Different image formats require different URLs
+# image_url       = "your-image-url"
+# image_url_qcow2 = "your-qcow2-image-url"
+# image_url_iso   = "your-iso-image-url"
+# image_url_raw   = "your-raw-image-url"
+# image_url_vmdk  = "your-vmdk-image-url"
+
+# Resource Configuration (optional - defaults will be used if not set)
+# image_name         = "test-image"
+# image_format       = "qcow2"
+# image_media_type   = "RootVolumeTemplate"
+# image_architecture = "x86_64"
+# image_boot_mode    = "Legacy"
+# image_platform     = "Linux"
+# image_guest_os_type = "Linux"
+# image_description  = "Test image created by Terraform"
+# image_virtio       = false
+# image_expunge      = false
+# image_storage_uuids = []

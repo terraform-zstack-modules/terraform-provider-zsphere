@@ -85,8 +85,7 @@ func (d *imageDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 	} else if !state.NamePattern.IsNull() {
 		params.AddQ("name~=" + state.NamePattern.ValueString())
 	}
-
-	images, err := d.client.QueryImage(params)
+	images, err := d.client.QueryImage(ctx, &params)
 
 	if err != nil {
 		resp.Diagnostics.AddError(

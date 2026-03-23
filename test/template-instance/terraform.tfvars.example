@@ -1,0 +1,54 @@
+# Copyright (c) ZStack.io, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+# Provider credentials are shared across all tests.
+# Set them via environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+#
+# Or create terraform.tfvars in the parent test/ directory.
+
+# Template Instance Configuration
+# Either provide template_uuid or template_name (template_uuid takes precedence)
+
+# Option 1: Use template UUID directly
+# template_uuid = "your-template-vm-uuid"
+
+# Option 2: Use template name (will lookup UUID)
+# template_name = "your-template-vm-name"
+
+# Deployment Location Configuration (IMPORTANT: At least cluster_uuid must be provided)
+# These parameters are required for template-based VM creation
+# They are NOT inherited from the template
+
+# Datacenter (Zone) UUID - optional, can be inferred from cluster
+# datacenter_uuid = "your-datacenter-uuid"
+
+# Cluster UUID - REQUIRED for template creation
+# cluster_uuid = "your-cluster-uuid"
+
+# Host UUID - optional, if not specified, auto-select from cluster
+# host_uuid = "your-host-uuid"
+
+# Network Configuration
+# port_group_name = "your-port-group-name"
+
+# Basic Example Configuration
+create_basic_example = true
+create_advanced_example = false
+
+# Instance Configuration
+instance_name        = "test-vm-from-template"
+instance_description = "Test VM instance created from template by Terraform"
+cpu_num              = 2
+memory_size          = 2048
+strategy             = "CreateStopped"
+
+# Advanced Configuration (for advanced example)
+# boot_mode    = "Legacy"
+# hostname     = "test-vm"
+# architecture = "x86_64"
+# cpu_mode     = "host-model"
+# gpu_type     = "qxl"
+# sound_card   = "ich6"

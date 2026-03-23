@@ -1,0 +1,32 @@
+# Copyright (c) ZStack.io, Inc.
+#
+# Copy this file to terraform.tfvars and update the values
+# or use environment variables:
+#   export TF_VAR_zsphere_host="your-host"
+#   export TF_VAR_zsphere_access_key_id="your-key-id"
+#   export TF_VAR_zsphere_access_key_secret="your-secret"
+#   export TF_VAR_datacenter_uuid="your-datacenter-uuid"
+
+# Provider Configuration
+zsphere_host              = "your-zsphere-host"
+zsphere_access_key_id     = "your-access-key-id"
+zsphere_access_key_secret = "your-access-key-secret"
+
+# Resource Configuration
+datacenter_uuid = "your-datacenter-uuid"
+
+# Advanced Features (optional)
+# cluster_display_network_cidr = "192.168.1.0/24"
+# cluster_migrate_network_cidr = "192.168.2.0/24"
+# cluster_check_cpu_model = "false"
+# cluster_cpu_mode = "hostPassthrough"
+# cluster_network_hp = false
+# cluster_automation_level = "closed"
+# cluster_cpu_over_provisioning_ratio = "4"
+# cluster_vm_ha_level = "NeverStop"
+
+# DRS Configuration (optional, requires hypervisor_type = KVM)
+# cluster_drs_enabled = false
+# cluster_drs_threshold_cpu = 80
+# cluster_drs_threshold_memory = 80
+# cluster_drs_threshold_duration = 300

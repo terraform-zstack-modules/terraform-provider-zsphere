@@ -105,7 +105,7 @@ func (d *l3NetworkDataSource) Read(ctx context.Context, req datasource.ReadReque
 	}
 
 	//Query L3 networks with name filtering
-	l3networks, err := d.client.QueryL3Network(params)
+	l3networks, err := d.client.QueryL3Network(ctx, &params)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to Read ZSphere Port Groups ",
@@ -135,7 +135,7 @@ func (d *l3NetworkDataSource) Read(ctx context.Context, req datasource.ReadReque
 	//l3freeIps, err := d.client.GetFreeIp(uuid, param.QueryParam{})
 	for _, l3network := range filterL3Networks {
 		// Query free IPs for the current L3 network UUID
-		l3freeIps, err := d.client.GetFreeIp(l3network.UUID, param.QueryParam{})
+		l3freeIps, err := d.client.GetFreeIpOfL3Network(ctx, l3network.UUID)
 		if err != nil {
 			resp.Diagnostics.AddError(
 				"Unable to Fetch Free IPs for L3 Network",

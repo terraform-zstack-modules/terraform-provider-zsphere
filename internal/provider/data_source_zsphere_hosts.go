@@ -87,7 +87,7 @@ func (d *hostsDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 		params.AddQ("name~=" + state.NamePattern.ValueString())
 	}
 
-	hosts, err := d.client.QueryHost(params)
+	hosts, err := d.client.QueryHost(ctx, &params)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to Read ZStack Hosts ",
